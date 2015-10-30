@@ -31,7 +31,9 @@ public final class TCPClient extends ConnectionProvider {
             try {
                 InetAddress _ia = InetAddress.getByName(setting.address);
                 Socket _s = new Socket(_ia, setting.port);
-                m_connectedInfo = String.format("%1$s:%2$s [client]", _s.getInetAddress().getHostName(), _s.getPort());
+                synchronized(m_synch) {
+                    m_connectedInfo = String.format("%1$s:%2$s [client]", _s.getInetAddress().getHostName(), _s.getPort());
+                }
                 
                 synchronized(m_synch) {
                     m_socket_w = new SocketWrapper(_s, m_listener, m_synch);

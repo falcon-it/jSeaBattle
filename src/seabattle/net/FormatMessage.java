@@ -57,7 +57,7 @@ public final class FormatMessage {
     
     public static final String escape = String.format("%1$c", (char)31),//,"\\r58gd5", 
             split1ch = "#", 
-            split2ch = FormatMessage.split1ch + FormatMessage.split1ch;
+            split2ch = String.format("%1$s%1$s", FormatMessage.split1ch);
     
     public Command command;
     public String body;
@@ -113,15 +113,19 @@ public final class FormatMessage {
     @Override
     public String toString() {
         return ((id == RouterClientSetting.failID) ? 
-                String.format("%1$s#%2$s##%3$s#%4$s", 
-                        FormatMessage.CommandFiels.COMMAND, command, 
-                        FormatMessage.CommandFiels.BODY, body) : 
-                String.format("%1$s#%2$s##%3$s#%4$s##%5$s#%6$s", 
+                String.format("%1$s%5$s%2$s%6$s%3$s%5$s%4$s", 
                         FormatMessage.CommandFiels.COMMAND, command, 
                         FormatMessage.CommandFiels.BODY, 
                         body.replaceAll(FormatMessage.split1ch, 
                                 FormatMessage.escape), 
-                        FormatMessage.CommandFiels.ID, id));
+                        FormatMessage.split1ch, FormatMessage.split2ch) : 
+                String.format("%1$s%7$s%2$s%8$s%3$s%7$s%4$s%8$s%5$s%7$s%6$s", 
+                        FormatMessage.CommandFiels.COMMAND, command, 
+                        FormatMessage.CommandFiels.BODY, 
+                        body.replaceAll(FormatMessage.split1ch, 
+                                FormatMessage.escape), 
+                        FormatMessage.CommandFiels.ID, id, 
+                        FormatMessage.split1ch, FormatMessage.split2ch));
     }
     
     public final byte[] toBinaryMessage() {

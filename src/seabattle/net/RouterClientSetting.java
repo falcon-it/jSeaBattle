@@ -19,6 +19,11 @@ public class RouterClientSetting extends ConnectionSetting {
     
     @Override
     protected ConnectionProvider createProvider() {
-        return null;
+        return new RouterTcpClient(this);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("router: %1$s: %2$d [%3$d]", address, port, id);
     }
 }

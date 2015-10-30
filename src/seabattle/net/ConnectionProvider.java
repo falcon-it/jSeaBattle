@@ -23,7 +23,7 @@ public abstract class ConnectionProvider {
     public abstract void destroy();
     public abstract void send(FormatMessage msg);
     
-    public final void initialize(IConnectionListener l) {
+    public void initialize(IConnectionListener l) {
         if(!isConnected()) {
             m_listener = l;
             initializeProvider();
@@ -36,7 +36,9 @@ public abstract class ConnectionProvider {
         }
     }
     
-    public final String getConnectedInformation() {
-        return m_connectedInfo;
+    public String getConnectedInformation() {
+        synchronized(m_synch) {
+            return m_connectedInfo;
+        }
     }
 }
