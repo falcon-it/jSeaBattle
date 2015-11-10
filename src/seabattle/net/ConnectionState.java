@@ -71,14 +71,14 @@ public abstract class ConnectionState {
     
     public ConnectionState(ConnectionProvider p) {
         java.util.Random _rnd = new java.util.Random();
-        //luck = _rnd.nextInt();
+        luck = _rnd.nextInt();
         //debug
-        if(p instanceof TCPClient) {
-            luck = 100;
-        }
-        else {
-            luck = 200;
-        }
+//        if(p instanceof TCPClient) {
+//            luck = 100;
+//        }
+//        else {
+//            luck = 200;
+//        }
         state = State.entry;
         luckResult = LuckResult.empty;
         my_counter = 0;
@@ -164,7 +164,9 @@ public abstract class ConnectionState {
                 try {
                     int _enemy_luck = Integer.parseInt(msg.body);
                     
-                    if(luck > _enemy_luck) {
+                    if((luck > _enemy_luck) || 
+                            ((luck == _enemy_luck) && 
+                                (provider instanceof TCPServer))) {
                         luckResult = LuckResult.luck;
                         state = State.myShot;
                         initializeMyShot();

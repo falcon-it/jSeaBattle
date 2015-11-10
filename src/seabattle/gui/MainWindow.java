@@ -113,7 +113,7 @@ public final class MainWindow extends JFrame {
                         btn0.setEnabled(true);
                     }
                     public final void extend() {
-                        //btn0.setEnabled(false);//!!!debug
+                        btn0.setEnabled(false);//!!!debug
                     }
                 };
         
