@@ -109,9 +109,12 @@ public final class MainWindow extends JFrame {
         
         ConstructInitializer.IConstructionStatus cb = 
                 new ConstructInitializer.IConstructionStatus() {
+                    @Override
                     public final void completed() {
                         btn0.setEnabled(true);
                     }
+                    
+                    @Override
                     public final void extend() {
                         btn0.setEnabled(false);//!!!debug
                     }

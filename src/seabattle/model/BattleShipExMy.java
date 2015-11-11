@@ -27,11 +27,14 @@ public final class BattleShipExMy {
     
     public final State checkShotResult(CellCords scc, BattleField my) {
         CellCords _scc[] = realShip.getCords();
+        boolean _mark_state = false;
         
         for(CellCords _cc : _scc) {
             if(CellCords.isEquallyCords(_cc, scc)) {
-                my.setCellState(scc.getX(), scc.getY(), BattleField.CellState.hit);
+                _mark_state = true;
                 m_State = State.killed;
+
+                my.setCellState(scc.getX(), scc.getY(), BattleField.CellState.hit);
                 
                 for(CellCords _cc0 : _scc) {
                     if(my.getCellState(_cc0.getX(), _cc0.getY()) != BattleField.CellState.hit) {
@@ -44,7 +47,7 @@ public final class BattleShipExMy {
             }
         }
         
-        return m_State;
+        return (_mark_state ? m_State : State.none);
     }
     
     @Override
