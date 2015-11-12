@@ -43,6 +43,7 @@ public final class RouterTcpClient extends ConnectionProvider {
     
     @Override
     public String getConnectedInformation() {
-        return realClient.getConnectedInformation().replaceAll("client", "router client");
+        return realClient.getConnectedInformation().replaceAll("client", 
+                String.format("router client ID=%1$s", setting.id));
     }
 }
